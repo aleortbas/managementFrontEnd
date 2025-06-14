@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { fetchProducts } from "../../store/productSlice";
+import { fetchcategories } from "../../store/categoriesSlice";
 import { RootState, AppDispatch } from "../../store";
 
-export default function ProductList() {
+export default function Categories() {
   const dispatch = useDispatch<AppDispatch>();
   const { items, status, error } = useSelector(
-    (state: RootState) => state.products
+    (state: RootState) => state.categories
   );
   const [form, setForm] = useState({
     name: "",
@@ -24,7 +24,7 @@ export default function ProductList() {
   };
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchcategories());
   }, [dispatch]);
 
   if (status === "loading") return <p className="text-blue-500">Loading...</p>;
@@ -33,22 +33,22 @@ export default function ProductList() {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Product List</h2>
+      <h2 className="text-2xl font-bold mb-4">categories List</h2>
       <div className="grid grid-cols-3 gap-4">
-        {items.map((product: any) => (
+        {items.map((categories: any) => (
           <Link
-            key={product.id}
-            to={`/products/${product.id}`}
+            key={categories.id}
+            to={`/categoriess/${categories.id}`}
             className="block border p-4 rounded shadow hover:bg-gray-50"
           >
-            <h3 className="text-lg font-semibold">{product.name}</h3>
-            <p>{product.description}</p>
-            <p className="text-green-600 font-bold">${product.price}</p>
+            <h3 className="text-lg font-semibold">{categories.name}</h3>
+            <p>{categories.description}</p>
+            <p className="text-green-600 font-bold">${categories.price}</p>
           </Link>
         ))}
       </div>
       <button
-        onClick={() => handleRedirect("/CreateProductForm")}
+        onClick={() => handleRedirect("/CreateCategoryForm")}
         className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
       >
         form

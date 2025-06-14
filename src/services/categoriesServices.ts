@@ -1,19 +1,19 @@
 import axios from 'axios';
 
-export const getProducts = () => {
-  return axios.get('http://localhost:5000/api/products'); 
+export const getCategories = () => {
+  return axios.get('http://localhost:5000/api/categories'); 
 };
 
-export const createProductService = (data: {
+export const createCategoriesService = (data: {
   name: string;
   description: string;
   price: number;
   category_id: string;
 }) => {
-  return axios.post('http://localhost:5000/api/products', data);
+  return axios.post('http://localhost:5000/api/Categories', data);
 }
 
-export const updateProductService = (id: string, data: {
+export const updateCategoriesService = (id: string, data: {
   name: string;
   description: string;
   price: number;
@@ -22,6 +22,6 @@ export const updateProductService = (id: string, data: {
   return axios.put(`http://localhost:5000/api/products/${id}`, data);
 }
 
-export const deleteProductService = (id: string) => {
+export const deleteCategoriesService = (id: string) => {
   return axios.delete(`http://localhost:5000/api/products/${id}`);
 }
