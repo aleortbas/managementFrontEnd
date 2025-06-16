@@ -51,7 +51,6 @@ export default function RegisterForm() {
 
       alert("Users uploaded successfully!");
       navigate("/ProductList");
-      console.log(res.data);
     } catch (err) {
       console.error("CSV upload failed:", err);
       alert("CSV upload failed");
