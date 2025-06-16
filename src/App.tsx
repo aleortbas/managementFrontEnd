@@ -17,18 +17,11 @@ function App() {
       <Navbar />
       <Routes>
         {/* Public */}
-        <Route path="/" element={<LoginForm />} />
+        <Route path="/" element={<ProductList />} />
         <Route path="/RegisterUser" element={<RegisterForm />} />
+        <Route path="/Login" element={<LoginForm />} />
 
         {/* Protected */}
-        <Route
-          path="/ProductList"
-          element={
-            <ProtectedRoute>
-              <ProductList />
-            </ProtectedRoute>
-          }
-        />
 
         <Route
           path="/CreateProductForm"

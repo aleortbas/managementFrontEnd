@@ -18,7 +18,7 @@ export default function LoginForm() {
     try {
       const resultAction = await dispatch(loginUser({ email, password }));
         if (loginUser.fulfilled.match(resultAction)) {
-            navigate("/ProductList");
+            navigate("/");
             localStorage.setItem('token', (resultAction.payload as any).token); 
         } else {
             console.error("Login failed:", (resultAction as any).payload);
@@ -31,16 +31,16 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="p-6 max-w-sm mx-auto">
       <h2 className="text-xl font-bold mb-4">Login</h2>
+      <label htmlFor="">Email or Username</label>
       <input
         type="text"
-        placeholder="Email or Username"
         className="w-full p-2 mb-2 border"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+      <label htmlFor="">Password</label>
       <input
         type="password"
-        placeholder="Password"
         className="w-full p-2 mb-4 border"
         value={password}
         onChange={(e) => setPassword(e.target.value)}

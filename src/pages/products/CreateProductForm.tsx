@@ -1,20 +1,26 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
-import { createProduct } from '../../store/productSlice';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
+import { createProduct } from "../../store/productSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateProductForm() {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
-    name: '',
-    description: '',
+    name: "",
+    description: "",
     price: 0,
-    category_id: '',
+    category_id: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(createProduct(form));
+  };
+
+  const handleRedirect = (path: string) => {
+    navigate(path);
   };
 
   return (
@@ -23,30 +29,40 @@ export default function CreateProductForm() {
         type="text"
         placeholder="Name"
         value={form.name}
-        onChange={e => setForm({ ...form, name: e.target.value })}
+        onChange={(e) => setForm({ ...form, name: e.target.value })}
         className="border p-2 w-full"
       />
       <textarea
         placeholder="Description"
         value={form.description}
-        onChange={e => setForm({ ...form, description: e.target.value })}
+        onChange={(e) => setForm({ ...form, description: e.target.value })}
         className="border p-2 w-full"
       />
       <input
         type="number"
         placeholder="Price"
         value={form.price}
-        onChange={e => setForm({ ...form, price: Number(e.target.value) })}
+        onChange={(e) => setForm({ ...form, price: Number(e.target.value) })}
         className="border p-2 w-full"
       />
       <input
         type="text"
         placeholder="Category ID"
         value={form.category_id}
-        onChange={e => setForm({ ...form, category_id: e.target.value })}
+        onChange={(e) => setForm({ ...form, category_id: e.target.value })}
         className="border p-2 w-full"
       />
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button
+        type="button"
+        onClick={() => handleRedirect("/")}
+        className="bg-red-600 text-white px-4 py-2 rounded "
+      >
+        Atras
+      </button>
+      <button
+        type="submit"
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
         Create Product
       </button>
     </form>

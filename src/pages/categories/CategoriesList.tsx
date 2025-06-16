@@ -33,7 +33,7 @@ export default function Categories() {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">categories List</h2>
+      <h2 className="text-2xl font-bold mb-4">Lista Categorias</h2>
       <div className="grid grid-cols-3 gap-4">
         {items.map((categories: any) => (
           <Link
@@ -48,16 +48,16 @@ export default function Categories() {
         ))}
       </div>
       <button
+        onClick={() => handleRedirect("/")}
+        className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
+      >
+        Volver
+      </button>
+      <button
         onClick={() => handleRedirect("/CreateCategoryForm")}
         className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
       >
-        form
-      </button>
-      <button
-        onClick={() => handleRedirect("/Categories")}
-        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      >
-        category
+        Añadir categoria
       </button>
     </div>
   );

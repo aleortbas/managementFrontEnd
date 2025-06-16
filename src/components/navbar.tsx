@@ -17,15 +17,29 @@ export default function Navbar() {
     navigate('/cart');
   };
 
+  const handleLoginClick = () => {
+    navigate('/Login');
+  };
+
   return (
-    <nav className="bg-red-800 text-white px-6 py-3 flex justify-between items-center">
-      <h1 className="text-xl font-bold">My Shop</h1>
-      <button
-        onClick={handleCartClick}
-        className="bg-green-500 px-4 py-2 rounded hover:bg-green-600"
-      >
-        Cart ({cartItems.length})
-      </button>
-    </nav>
+<nav className="bg-red-800 text-white px-6 py-3 flex justify-between items-center">
+  <h1 className="text-xl font-bold">My Shop</h1>
+
+  <div className="flex items-center gap-4 ml-auto">
+    <button
+      onClick={handleCartClick}
+      className="bg-green-500 px-4 py-2 rounded hover:bg-green-600"
+    >
+      Cart ({cartItems.length})
+    </button>
+    <button
+      onClick={handleLoginClick}
+      className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600"
+    >
+      Login
+    </button>
+  </div>
+</nav>
+
   );
 }

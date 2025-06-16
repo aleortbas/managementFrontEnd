@@ -48,6 +48,10 @@ export default function ProductDetail() {
     navigate("/");
   };
 
+  const handleRedirect = (path: string) => {
+    navigate(path);
+  };
+
   if (!product) return <p>Loading...</p>;
 
   return (
@@ -77,6 +81,13 @@ export default function ProductDetail() {
             className="border p-2 w-full"
           />
           <button
+            type="button"
+            onClick={() => handleRedirect("/")}
+            className="bg-red-600 text-white px-4 py-2 rounded "
+          >
+            Atras
+          </button>
+          <button
             onClick={handleUpdate}
             className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >
@@ -95,6 +106,13 @@ export default function ProductDetail() {
             <strong>Price:</strong> ${product.price}
           </p>
           <button
+            type="button"
+            onClick={() => handleRedirect("/")}
+            className="bg-red-600 text-white px-4 py-2 rounded "
+          >
+            Atras
+          </button>
+          <button
             onClick={() => setIsEditing(true)}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
@@ -102,7 +120,7 @@ export default function ProductDetail() {
           </button>
           <button
             onClick={handleDelete}
-            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+            className="bg-yellow-600 text-white px-4 py-2 rounded"
           >
             Delete
           </button>
