@@ -18,7 +18,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-800 text-white px-6 py-3 flex justify-between items-center">
+    <nav className="bg-red-800 text-white px-6 py-3 flex justify-between items-center">
       <h1 className="text-xl font-bold">My Shop</h1>
       <button
         onClick={handleCartClick}
