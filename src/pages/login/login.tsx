@@ -17,44 +17,66 @@ export default function LoginForm() {
 
     try {
       const resultAction = await dispatch(loginUser({ email, password }));
-        if (loginUser.fulfilled.match(resultAction)) {
-            navigate("/");
-            localStorage.setItem('token', (resultAction.payload as any).token); 
-        } else {
-            console.error("Login failed:", (resultAction as any).payload);
-        }
+      if (loginUser.fulfilled.match(resultAction)) {
+        navigate("/");
+        localStorage.setItem("token", (resultAction.payload as any).token);
+      } else {
+        console.error("Login failed:", (resultAction as any).payload);
+      }
     } catch (error) {
-        console.error("Login failed:", error);
+      console.error("Login failed:", error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 max-w-sm mx-auto">
-      <h2 className="text-xl font-bold mb-4">Login</h2>
-      <label htmlFor="">Email or Username</label>
-      <input
-        type="text"
-        className="w-full p-2 mb-2 border"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <label htmlFor="">Password</label>
-      <input
-        type="password"
-        className="w-full p-2 mb-4 border"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-md mx-auto bg-white p-8 mt-12 rounded-xl shadow-lg space-y-5"
+    >
+      <h2 className="text-2xl font-bold text-gray-800 text-center">
+        🔐 Iniciar Sesión
+      </h2>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Email o Usuario
+        </label>
+        <input
+          type="text"
+          className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Contraseña
+        </label>
+        <input
+          type="password"
+          className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+
       <button
         type="submit"
-        className="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600"
+        className="w-full bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-blue-700 transition-all"
       >
-        {status === "loading" ? "Logging in..." : "Login"}
+        {status === "loading" ? "Iniciando sesión..." : "Iniciar Sesión"}
       </button>
-      <button type="button" onClick={() => navigate("/RegisterUser")} className="mt-2 bg-green-500 text-white w-full py-2 rounded hover:bg-green-600">
-        Regitrar usuario
+
+      <button
+        type="button"
+        onClick={() => navigate("/RegisterUser")}
+        className="w-full bg-green-500 text-white font-medium py-2 rounded-lg hover:bg-green-600 transition-all"
+      >
+        Registrar Usuario
       </button>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
+
+      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
     </form>
   );
 }

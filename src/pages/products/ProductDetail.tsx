@@ -55,76 +55,102 @@ export default function ProductDetail() {
   if (!product) return <p>Loading...</p>;
 
   return (
-    <div className="p-6 max-w-md mx-auto border rounded space-y-4">
-      <h2 className="text-2xl font-bold mb-2">Product Detail</h2>
+    <div className="max-w-xl mx-auto bg-white p-8 mt-10 rounded-xl shadow-lg space-y-6">
+      <h2 className="text-3xl font-bold text-gray-800">
+        📦 Detalles del Producto
+      </h2>
 
       {isEditing ? (
-        <>
-          <input
-            type="text"
-            name="name"
-            value={product.name}
-            onChange={handleChange}
-            className="border p-2 w-full"
-          />
-          <textarea
-            name="description"
-            value={product.description}
-            onChange={handleChange}
-            className="border p-2 w-full"
-          />
-          <input
-            type="number"
-            name="price"
-            value={product.price}
-            onChange={handleChange}
-            className="border p-2 w-full"
-          />
-          <button
-            type="button"
-            onClick={() => handleRedirect("/")}
-            className="bg-red-600 text-white px-4 py-2 rounded "
-          >
-            Atras
-          </button>
-          <button
-            onClick={handleUpdate}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-          >
-            Save
-          </button>
-        </>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Nombre
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={product.name}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Descripción
+            </label>
+            <textarea
+              name="description"
+              value={product.description}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Precio
+            </label>
+            <input
+              type="number"
+              name="price"
+              value={product.price}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="flex justify-between pt-4">
+            <button
+              type="button"
+              onClick={() => handleRedirect("/")}
+              className="bg-gray-500 text-white px-5 py-2 rounded-md hover:bg-gray-600 shadow"
+            >
+              ← Atrás
+            </button>
+            <button
+              onClick={handleUpdate}
+              className="bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700 shadow"
+            >
+              💾 Guardar
+            </button>
+          </div>
+        </div>
       ) : (
-        <>
+        <div className="space-y-3 text-gray-800">
           <p>
-            <strong>Name:</strong> {product.name}
+            <span className="font-semibold">📛 Nombre:</span> {product.name}
           </p>
           <p>
-            <strong>Description:</strong> {product.description}
+            <span className="font-semibold">📝 Descripción:</span>{" "}
+            {product.description}
           </p>
           <p>
-            <strong>Price:</strong> ${product.price}
+            <span className="font-semibold">💲 Precio:</span> ${product.price}
           </p>
-          <button
-            type="button"
-            onClick={() => handleRedirect("/")}
-            className="bg-red-600 text-white px-4 py-2 rounded "
-          >
-            Atras
-          </button>
-          <button
-            onClick={() => setIsEditing(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            Edit
-          </button>
-          <button
-            onClick={handleDelete}
-            className="bg-yellow-600 text-white px-4 py-2 rounded"
-          >
-            Delete
-          </button>
-        </>
+
+          <div className="flex justify-between pt-4 gap-4">
+            <button
+              type="button"
+              onClick={() => handleRedirect("/")}
+              className="bg-gray-500 text-white px-5 py-2 rounded-md hover:bg-gray-600 shadow"
+            >
+              ← Atrás
+            </button>
+            <button
+              onClick={() => setIsEditing(true)}
+              className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 shadow"
+            >
+              ✏️ Editar
+            </button>
+            <button
+              onClick={handleDelete}
+              className="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-700 shadow"
+            >
+              🗑️ Eliminar
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

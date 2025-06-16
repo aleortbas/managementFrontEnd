@@ -32,33 +32,43 @@ export default function Categories() {
     return <p className="text-red-500">Error: {error}</p>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Lista Categorias</h2>
-      <div className="grid grid-cols-3 gap-4">
-        {items.map((categories: any) => (
+    <div className="max-w-6xl mx-auto bg-white p-8 mt-10 rounded-xl shadow-lg">
+      <h2 className="text-3xl font-bold text-gray-800 mb-6">
+        📂 Lista de Categorías
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {items.map((category: any) => (
           <Link
-            key={categories.id}
-            to={`/Categories/${categories.id}`}
-            className="block border p-4 rounded shadow hover:bg-gray-50"
+            key={category.id}
+            to={`/Categories/${category.id}`}
+            className="block bg-white border border-gray-200 rounded-lg shadow-sm p-5 hover:shadow-md hover:bg-gray-50 transition"
           >
-            <h3 className="text-lg font-semibold">{categories.name}</h3>
-            <p>{categories.description}</p>
-            <p className="text-green-600 font-bold">${categories.price}</p>
+            <h3 className="text-lg font-semibold text-gray-800">
+              {category.name}
+            </h3>
+            <p className="text-gray-600">{category.description}</p>
+            {category.price && (
+              <p className="text-green-600 font-bold mt-2">${category.price}</p>
+            )}
           </Link>
         ))}
       </div>
-      <button
-        onClick={() => handleRedirect("/")}
-        className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-      >
-        Volver
-      </button>
-      <button
-        onClick={() => handleRedirect("/CreateCategoryForm")}
-        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      >
-        Añadir categoria
-      </button>
+
+      <div className="flex flex-wrap gap-4 mt-8">
+        <button
+          onClick={() => handleRedirect("/")}
+          className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg shadow"
+        >
+          ← Volver
+        </button>
+        <button
+          onClick={() => handleRedirect("/CreateCategoryForm")}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow"
+        >
+          ➕ Añadir Categoría
+        </button>
+      </div>
     </div>
   );
 }

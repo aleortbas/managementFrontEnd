@@ -46,73 +46,77 @@ export default function CartPage() {
   if (cartItems.length === 0) return <p className="p-4">Your cart is empty.</p>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Cart Details</h2>
-      <ul className="space-y-4 mb-6">
-        {cartItems.map((item, index) => (
-          <li key={index} className="border p-4 rounded shadow">
-            <h3 className="text-lg font-semibold">{item.name}</h3>
-            <p>{item.description}</p>
-            <p>
-              Quantity: <strong>{item.quantity}</strong>
-            </p>
-            <p>Category: {item.category}</p>
-          </li>
-        ))}
-      </ul>
+<div className="max-w-4xl mx-auto bg-white p-8 mt-10 rounded-xl shadow-lg">
+  <h2 className="text-3xl font-bold text-gray-800 mb-6">🛒 Detalles del Carrito</h2>
 
-      <button
-        onClick={() => handleRedirect("/")}
-        className="bg-red-600 text-white px-4 py-2 rounded"
-      >
-        Atras
-      </button>
+  <ul className="space-y-4 mb-8">
+    {cartItems.map((item, index) => (
+      <li key={index} className="border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow transition">
+        <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
+        <p className="text-gray-600">{item.description}</p>
+        <p className="text-sm text-gray-700 mt-1">
+          <strong>Cantidad:</strong> {item.quantity}
+        </p>
+        <p className="text-sm text-gray-700">
+          <strong>Categoría:</strong> {item.category}
+        </p>
+      </li>
+    ))}
+  </ul>
 
-      <button
-        onClick={handleCheckout}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Checkout
-      </button>
+  <div className="flex justify-between gap-4">
+    <button
+      onClick={() => handleRedirect("/")}
+      className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg shadow"
+    >
+      ← Atrás
+    </button>
 
-      {checkoutResult && (
-        <>
-          {/* Semi-transparent overlay */}
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+    <button
+      onClick={handleCheckout}
+      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow"
+    >
+      ✅ Finalizar Compra
+    </button>
+  </div>
+
+  {checkoutResult && (
+    <>
+      {/* Semi-transparent overlay */}
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50 z-40"
+        onClick={() => setCheckoutResult(null)}
+      ></div>
+
+      {/* Floating checkout summary */}
+      <div className="fixed bottom-6 right-6 w-full max-w-md bg-white rounded-xl shadow-2xl z-50 p-6">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold text-gray-800">🧾 Resumen del Pedido</h3>
+          <button
             onClick={() => setCheckoutResult(null)}
-          ></div>
+            className="text-red-500 font-bold hover:underline"
+          >
+            Cerrar
+          </button>
+        </div>
 
-          {/* Floating checkout summary */}
-          <div className="fixed bottom-4 right-4 w-96 bg-white rounded-lg shadow-lg z-50 p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold">Checkout Summary</h3>
-              <button
-                onClick={() => setCheckoutResult(null)}
-                className="text-red-500 font-bold hover:underline"
-              >
-                Close
-              </button>
+        <div className="max-h-60 overflow-y-auto space-y-3 text-sm text-gray-700">
+          {checkoutResult.map((item, index) => (
+            <div key={index}>
+              <p>
+                <strong>{item.name}</strong> x {item.quantity} → ${item.total}
+              </p>
             </div>
+          ))}
+        </div>
 
-            <div className="max-h-60 overflow-y-auto space-y-2">
-              {checkoutResult.map((item, index) => (
-                <div key={index}>
-                  <p>
-                    <strong>{item.name}</strong> x {item.quantity} → $
-                    {item.total}
-                  </p>
-                </div>
-              ))}
-            </div>
+        <p className="mt-4 text-right text-green-600 font-bold text-lg">
+          Total: ${checkoutResult.reduce((sum, item) => sum + (item.total || 0), 0)}
+        </p>
+      </div>
+    </>
+  )}
+</div>
 
-            <p className="mt-4 text-green-600 font-bold text-right">
-              Total: $
-              {checkoutResult.reduce((sum, item) => sum + (item.total || 0), 0)}
-            </p>
-          </div>
-        </>
-      )}
-    </div>
   );
 }

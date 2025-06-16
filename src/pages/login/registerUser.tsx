@@ -59,32 +59,41 @@ export default function RegisterForm() {
   };
 
   return (
-    <form onSubmit={handleSubmitRegister} className="p-6 max-w-sm mx-auto">
-      <h2 className="text-xl font-bold mb-4">Registrar usuario</h2>
+    <form
+      onSubmit={handleSubmitRegister}
+      className="max-w-md mx-auto bg-white p-8 mt-12 rounded-xl shadow-lg space-y-5"
+    >
+      <h2 className="text-2xl font-bold text-gray-800 text-center">
+        📝 Registrar Usuario
+      </h2>
+
       <input
         type="text"
-        placeholder="Email"
-        className="w-full p-2 mb-2 border"
+        placeholder="Correo electrónico"
+        className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+
       <input
         type="text"
-        placeholder="Username"
-        className="w-full p-2 mb-2 border"
+        placeholder="Nombre de usuario"
+        className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
+
       <input
         type="password"
         placeholder="Contraseña"
-        className="w-full p-2 mb-4 border"
+        className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <div className="mb-4">
-        <label className="block mb-1 font-semibold">
-          Cargue un archivo CSV para registrar múltiples usuarios:
+
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">
+          📂 Cargar archivo CSV para múltiples usuarios:
         </label>
         <input
           type="file"
@@ -92,24 +101,25 @@ export default function RegisterForm() {
           onChange={(e) => {
             if (e.target.files?.[0]) setCsvFile(e.target.files[0]);
           }}
-          className="w-full border p-2"
+          className="w-full border border-gray-300 p-2 rounded-md"
         />
         <button
           type="button"
           onClick={handleCsvUpload}
-          className="mt-2 bg-green-500 text-white w-full py-2 rounded hover:bg-green-600"
+          className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-all"
         >
-          Cargar CSV
+          📤 Cargar CSV
         </button>
       </div>
 
       <button
         type="submit"
-        className="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600"
+        className="w-full bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-blue-700 transition-all"
       >
-        {status === "cargando" ? "Iniciando Sesion..." : "Iniciar Sesion"}
+        {status === "cargando" ? "Registrando..." : "Registrar Usuario"}
       </button>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
+
+      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
     </form>
   );
 }

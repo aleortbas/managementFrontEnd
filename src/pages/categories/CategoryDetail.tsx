@@ -48,44 +48,54 @@ export default function CategoryDetail() {
   if (!category) return <p>Loading...</p>;  
 
   return (
-    <div className="p-6 max-w-md mx-auto border rounded space-y-4">
-      <h2 className="text-2xl font-bold mb-2">category Detail</h2>
+    <div className="max-w-xl mx-auto bg-white p-8 mt-10 rounded-xl shadow-lg space-y-6">
+  <h2 className="text-2xl font-bold text-gray-800">📁 Detalle de Categoría</h2>
 
-      {isEditing ? (
-        <>
-          <input
-            type="text"
-            name="name"
-            value={category.name}
-            onChange={handleChange}
-            className="border p-2 w-full"
-          />
-          <button
-            onClick={handleUpdate}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-          >
-            Save
-          </button>
-        </>
-      ) : (
-        <>
-          <p>
-            <strong>Name:</strong> {category.name}
-          </p>
-          <button
-            onClick={() => setIsEditing(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            Edit
-          </button>
-          <button
-            onClick={handleDelete}
-            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-          >
-            Delete
-          </button>
-        </>
-      )}
+  {isEditing ? (
+    <div className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Nombre de la Categoría</label>
+        <input
+          type="text"
+          name="name"
+          value={category.name}
+          onChange={handleChange}
+          className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div className="flex justify-end gap-4">
+        <button
+          onClick={handleUpdate}
+          className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-md shadow"
+        >
+          💾 Guardar
+        </button>
+      </div>
     </div>
+  ) : (
+    <div className="space-y-3 text-gray-800">
+      <p>
+        <span className="font-semibold">📛 Nombre:</span> {category.name}
+      </p>
+
+      <div className="flex justify-end gap-4 pt-4">
+        <button
+          onClick={() => setIsEditing(true)}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md shadow"
+        >
+          ✏️ Editar
+        </button>
+        <button
+          onClick={handleDelete}
+          className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-md shadow"
+        >
+          🗑️ Eliminar
+        </button>
+      </div>
+    </div>
+  )}
+</div>
+
   );
 }
