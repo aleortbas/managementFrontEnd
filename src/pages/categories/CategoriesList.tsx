@@ -38,7 +38,7 @@ export default function Categories() {
         {items.map((categories: any) => (
           <Link
             key={categories.id}
-            to={`/categoriess/${categories.id}`}
+            to={`/Categories/${categories.id}`}
             className="block border p-4 rounded shadow hover:bg-gray-50"
           >
             <h3 className="text-lg font-semibold">{categories.name}</h3>

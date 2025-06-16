@@ -10,9 +10,6 @@ export const createcategory = createAsyncThunk(
   'categories/create',
   async (categoryData: {
     name: string;
-    description: string;
-    price: number;
-    category_id: string;
   }, thunkAPI) => {
     try {
       const res = await createCategoriesService(categoryData);
@@ -26,7 +23,7 @@ export const createcategory = createAsyncThunk(
 export const updatecategory = createAsyncThunk(
   'categories/update',
   async (
-    { id, data }: { id: string; data: { name: string; description: string; price: number, category_id: string } },
+    { id, data }: { id: string; data: { name: string } },
     thunkAPI
   ) => {
     try {
