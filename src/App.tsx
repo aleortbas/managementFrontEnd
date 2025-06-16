@@ -4,13 +4,15 @@ import ProductDetail from './pages/products/ProductDetail';
 import CreateProductForm from './pages/products/CreateProductForm';
 import Categories from './pages/categories/CategoriesList';
 import CategoryDetail from './pages/categories/CategoryDetail';
-import LoginForm from './pages/login/login';
 import RegisterForm from './pages/login/registerUser';
 import CreatecategoryForm from './pages/categories/CreateCategoryForm';
+import CartPage from './pages/cart/cartPage';
+import Navbar from './components/navbar';
 
 function App() {
   return (
     <BrowserRouter>
+    <Navbar />
       <Routes>
         <Route path="/" element={<ProductList />} />
         <Route path="/Register" element={<RegisterForm />} />
@@ -20,7 +22,7 @@ function App() {
         <Route path="/Categories" element={<Categories />} />
         <Route path="/CreateCategoryForm" element={<CreatecategoryForm />} />
         <Route path="/Categories/:id" element={<CategoryDetail />} />
-        {/* <Route path="/Login" element={<LoginForm />} /> */}
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
     </BrowserRouter>
   );

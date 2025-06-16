@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addToCartService } from '../services/cartServices';
+import { addToCartService, getCartService } from '../services/cartServices';
 
 export const addToCart = createAsyncThunk(
   'cart/add',
@@ -12,6 +12,16 @@ export const addToCart = createAsyncThunk(
     }
   }
 );
+
+export const fetchCart = createAsyncThunk('cart/fetch', async (_, thunkAPI) => {
+  try {
+    const res = await getCartService();
+    return res.data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response?.data?.message || 'Failed to fetch cart');
+  }
+});
+
 
 export interface CartItem {
   product_id: string;
@@ -30,6 +40,10 @@ const cartSlice = createSlice({
     builder.addCase(addToCart.fulfilled, (state, action) => {
       state.items.push(action.payload as CartItem);
     });
+    builder.addCase(fetchCart.fulfilled, (state, action) => {
+      state.items = action.payload;
+    })
+
   },
 });
 
