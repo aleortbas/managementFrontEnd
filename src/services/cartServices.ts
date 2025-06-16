@@ -9,5 +9,5 @@ export const getCartService = () => {
 };
 
 export const checkout = () => {
-  return axios.get("http://localhost:5000/api/cart");
+  return axios.post("http://localhost:5000/api/cart/checkout");
 };

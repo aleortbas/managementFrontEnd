@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addToCartService, getCartService } from '../services/cartServices';
+import { addToCartService, getCartService, checkout as checkoutService } from '../services/cartServices';
 
 export const addToCart = createAsyncThunk(
   'cart/add',
@@ -22,6 +22,19 @@ export const fetchCart = createAsyncThunk('cart/fetch', async (_, thunkAPI) => {
   }
 });
 
+export const checkout = createAsyncThunk(
+  'cart/checkout',
+  async (_, thunkAPI) => {
+    try {
+      const res = await checkoutService();
+      return res.data.details; // return only the checkout info
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || 'Failed to checkout'
+      );
+    }
+  }
+);
 
 export interface CartItem {
   product_id: string;
