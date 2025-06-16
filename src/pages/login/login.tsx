@@ -18,7 +18,8 @@ export default function LoginForm() {
     try {
       const resultAction = await dispatch(loginUser({ email, password }));
         if (loginUser.fulfilled.match(resultAction)) {
-            navigate("/");
+            navigate("/ProductList");
+            localStorage.setItem('token', (resultAction.payload as any).token); 
         } else {
             console.error("Login failed:", (resultAction as any).payload);
         }
@@ -49,6 +50,9 @@ export default function LoginForm() {
         className="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600"
       >
         {status === "loading" ? "Logging in..." : "Login"}
+      </button>
+      <button type="button" onClick={() => navigate("/RegisterUser")} className="mt-2 bg-green-500 text-white w-full py-2 rounded hover:bg-green-600">
+        Regitrar usuario
       </button>
       {error && <p className="text-red-500 mt-2">{error}</p>}
     </form>
