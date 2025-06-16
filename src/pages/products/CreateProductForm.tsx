@@ -14,10 +14,24 @@ export default function CreateProductForm() {
     category_id: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    dispatch(createProduct(form));
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const resultAction = await dispatch(createProduct(form));
+
+    if (createProduct.fulfilled.match(resultAction)) {
+      alert("✅ Producto creado exitosamente");
+      navigate("/"); 
+    } else {
+      alert("❌ Error al crear el producto");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("⚠️ Error inesperado al crear el producto");
+  }
+};
+
 
   const handleRedirect = (path: string) => {
     navigate(path);

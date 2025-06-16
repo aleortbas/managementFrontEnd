@@ -10,9 +10,22 @@ export default function CreatecategoryForm() {
     name: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(createcategory(form));
+  
+    try {
+      const resultAction = await dispatch(createcategory(form));
+  
+      if (createcategory.fulfilled.match(resultAction)) {
+        alert("✅ Producto creado exitosamente");
+        navigate("/"); 
+      } else {
+        alert("❌ Error al crear el producto");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("⚠️ Error inesperado al crear el producto");
+    }
   };
 
   const navigate = useNavigate();
