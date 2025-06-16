@@ -14,9 +14,8 @@ function App() {
     <BrowserRouter>
     <Navbar />
       <Routes>
-        <Route path="/" element={<ProductList />} />
-        <Route path="/Register" element={<RegisterForm />} />
-        <Route path="/" element={<ProductList />} />
+        <Route path="/" element={<RegisterForm />} />
+        <Route path="/ProductList" element={<ProductList />} />
         <Route path="/CreateProductForm" element={<CreateProductForm />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/Categories" element={<Categories />} />

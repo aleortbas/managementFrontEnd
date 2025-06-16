@@ -19,38 +19,44 @@ export default function RegisterForm() {
     e.preventDefault();
 
     try {
-      const resultAction = await dispatch(registerUser({ email, username, password }));
-        if (registerUser.fulfilled.match(resultAction)) {
-            navigate("/");
-        } else {
-            console.error("Login failed:", (resultAction as any).payload);
-        }
+      const resultAction = await dispatch(
+        registerUser({ email, username, password })
+      );
+      if (registerUser.fulfilled.match(resultAction)) {
+        navigate("/ProductList");
+      } else {
+        console.error("Login failed:", (resultAction as any).payload);
+      }
     } catch (error) {
-        console.error("Login failed:", error);
+      console.error("Login failed:", error);
     }
   };
 
   const handleCsvUpload = async () => {
-  if (!csvFile) return;
+    if (!csvFile) return;
 
-  const formData = new FormData();
-  formData.append("file", csvFile);
+    const formData = new FormData();
+    formData.append("file", csvFile);
 
-  try {
-    const res = await axios.post("http://localhost:5000/api/users/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/users/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-    alert("Users uploaded successfully!");
-    console.log(res.data);
-  } catch (err) {
-    console.error("CSV upload failed:", err);
-    alert("CSV upload failed");
-  }
-};
-
+      alert("Users uploaded successfully!");
+      navigate("/ProductList");
+      console.log(res.data);
+    } catch (err) {
+      console.error("CSV upload failed:", err);
+      alert("CSV upload failed");
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="p-6 max-w-sm mx-auto">
@@ -77,23 +83,25 @@ export default function RegisterForm() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <div className="mb-4">
-  <label className="block mb-1 font-semibold">Upload Users via CSV:</label>
-  <input
-    type="file"
-    accept=".csv"
-    onChange={(e) => {
-      if (e.target.files?.[0]) setCsvFile(e.target.files[0]);
-    }}
-    className="w-full border p-2"
-  />
-  <button
-    type="button"
-    onClick={handleCsvUpload}
-    className="mt-2 bg-green-500 text-white w-full py-2 rounded hover:bg-green-600"
-  >
-    Upload CSV
-  </button>
-</div>
+        <label className="block mb-1 font-semibold">
+          Upload Users via CSV:
+        </label>
+        <input
+          type="file"
+          accept=".csv"
+          onChange={(e) => {
+            if (e.target.files?.[0]) setCsvFile(e.target.files[0]);
+          }}
+          className="w-full border p-2"
+        />
+        <button
+          type="button"
+          onClick={handleCsvUpload}
+          className="mt-2 bg-green-500 text-white w-full py-2 rounded hover:bg-green-600"
+        >
+          Upload CSV
+        </button>
+      </div>
 
       <button
         type="submit"
